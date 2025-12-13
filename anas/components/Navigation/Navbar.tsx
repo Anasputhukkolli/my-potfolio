@@ -3,9 +3,20 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { User, FileText, Briefcase, Mail } from 'lucide-react';
+import { User, FileText, Briefcase, Mail, LucideIcon } from 'lucide-react';
 
-const navItems = [
+interface NavItem {
+  name: string;
+  path: string;
+  icon: LucideIcon;
+}
+
+interface IndicatorStyle {
+  left: number;
+  width: number;
+}
+
+const navItems: NavItem[] = [
   { name: 'About', path: '/about', icon: User },
   { name: 'Resume', path: '/resume', icon: FileText },
   { name: 'Portfolio', path: '/portfolio', icon: Briefcase },
@@ -14,11 +25,11 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [indicatorStyle, setIndicatorStyle] = useState({});
-  const navRef = useRef(null);
+  const [indicatorStyle, setIndicatorStyle] = useState<IndicatorStyle>({ left: 0, width: 0 });
+  const navRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const activeLink = navRef.current?.querySelector('.active-link');
+    const activeLink = navRef.current?.querySelector('.active-link') as HTMLElement;
     if (activeLink) {
       setIndicatorStyle({
         left: activeLink.offsetLeft,
