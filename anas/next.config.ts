@@ -1,13 +1,19 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: ['localhost'],
-    formats: ['image/avif', 'image/webp'],
-  },
-  // Optional: Enable experimental features if needed
-  experimental: {
-    typedRoutes: true,
-  },
-}
+import type { NextConfig } from "next";
 
-module.exports = nextConfig
+const nextConfig: NextConfig = {
+  typedRoutes: true, // ← moved out of experimental
+
+  images: {
+    remotePatterns: [
+      // Supabase storage images
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+      // Add any other image domains you use here
+    ],
+  },
+};
+
+export default nextConfig;
