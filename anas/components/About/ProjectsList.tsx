@@ -1,135 +1,75 @@
 'use client';
 
-import { ArrowRight, ExternalLink } from 'lucide-react';
-
 const projects = [
-  {
-    id: 1,
-    title: 'KALKUS',
-    category: 'Website',
-    image: '/images/project/kalkus.png',
-    url: 'https://kalkus.in/',
-    tags: ['Next.js',  'JavaScript', 'Tailwind CSS'],
-  },
-  {
-    id: 2,
-    title: 'IEEE MEA SB',
-    category: 'Website',
-    image: '/images/project/ieeemea.png',
-    url: 'https://www.ieeemeasb.org/',
-    tags: ['WORD PRESS', 'Digital Ocean'],
-  },
-  {
-    id: 3,
-    title: 'xtrinia6',
-    category: 'Website',
-    image: '/images/project/Xt.png',
-    url: 'https://anasputhukkolli.github.io/xtrinea/',
-    tags: ['HTML 5', 'CSS', 'JavaScript', 'BOOTSTRAP'],
-  },
-  {
-    id: 4,
-    title: 'TookDeal',
-    category: 'Web Site',
-    image: '/images/project/tookdeal.png',
-    url: 'https://www.tookdeal.com',
-    tags: ['Next.js', 'Tailwind CSS', 'JavaScript', 'Supabase', 'Groq ApI'],
-  },
-  {
-    id: 5,
-    title: 'Aima BloodDonationApp',
-    category: 'Application',
-    image: '/images/project/aima.png',
-    url: 'https://github.com/shahinshpbr10/BloodDonationApp.git',
-    tags: ['Flutter', 'Dart', 'Android studio'],
-  },
-  {
-    id: 6,
-    title: 'Zappq',
-    category: 'Web Development',
-    image: '/images/project/Zapq.png',
-    url: 'http://zappq.com/',
-    tags: ['HTML 5', 'CSS','Tailwind CSS', 'JavaScript'],
-  },
+  { id: 1, title: 'KALKUS', category: 'Website', image: '/images/project/kalkus.png', url: 'https://kalkus.in/', tags: ['Next.js', 'JavaScript', 'Tailwind CSS'] },
+  { id: 2, title: 'IEEE MEA SB', category: 'Website', image: '/images/project/ieeemea.png', url: 'https://www.ieeemeasb.org/', tags: ['WordPress', 'Digital Ocean'] },
+  { id: 3, title: 'xtrinia6', category: 'Website', image: '/images/project/Xt.png', url: 'https://anasputhukkolli.github.io/xtrinea/', tags: ['HTML5', 'CSS', 'JavaScript', 'Bootstrap'] },
+  { id: 4, title: 'TookDeal', category: 'Website', image: '/images/project/tookdeal.png', url: 'https://www.tookdeal.com', tags: ['Next.js', 'Tailwind CSS', 'Supabase', 'Groq API'] },
+  { id: 5, title: 'Aima Blood Donation', category: 'Application', image: '/images/project/aima.png', url: 'https://github.com/shahinshpbr10/BloodDonationApp.git', tags: ['Flutter', 'Dart'] },
+  { id: 6, title: 'Zappq', category: 'Website', image: '/images/project/Zapq.png', url: 'http://zappq.com/', tags: ['HTML5', 'Tailwind CSS', 'JavaScript'] },
 ];
 
 export default function ProjectsList() {
-  const displayedProjects = projects.slice(0, 6);
-
   return (
-    <section className="mb-10">
-      <header className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-xs text-cyan-400 uppercase tracking-widest font-mono font-bold">PROJECTS_ARCHIVE</span>
-          <div className="h-px flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent"></div>
-        </div>
-        <h2 className="text-3xl font-semibold relative pb-4 text-cyan-400 font-mono">
-          {'<RECENT_WORK/>'}
-          <span className="absolute bottom-0 left-0 w-16 h-[2px] bg-gradient-to-r from-cyan-500 to-pink-500"></span>
-        </h2>
-      </header>
-
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {displayedProjects.map((project, index) => (
-          <li key={project.id} className="group relative">
-            <a 
-              href={project.url} 
-              target="_blank" 
+    <section className="space-y-6">
+      <ul className="grid grid-cols-2 gap-4" style={{ listStyle: 'none', padding: 0 }}>
+        {projects.map((project, i) => (
+          <li key={project.id}>
+            <a
+              href={project.url}
+              target="_blank"
               rel="noopener noreferrer"
-              className="block h-full"
+              className="group flex flex-col h-full rounded-[18px] overflow-hidden no-underline"
+              style={{
+                background: '#FFE033',
+                border: '2.5px solid #111',
+                boxShadow: '5px 5px 0 #111',
+                transition: 'transform .17s, box-shadow .17s',
+                animationDelay: `${i * 0.08}s`,
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.transform = 'translate(-3px,-3px)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '8px 8px 0 #111';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.transform = '';
+                (e.currentTarget as HTMLElement).style.boxShadow = '5px 5px 0 #111';
+              }}
             >
-              <div className="relative h-full p-4 bg-black/30 border border-cyan-500/30 hover:border-cyan-500 transition-all font-mono">
-                {/* Corner decorations */}
-                <div className="absolute top-1 left-1 w-2 h-2 border-l border-t border-cyan-500/50"></div>
-                <div className="absolute top-1 right-1 w-2 h-2 border-r border-t border-pink-500/50"></div>
-                <div className="absolute bottom-1 left-1 w-2 h-2 border-l border-b border-pink-500/50"></div>
-                <div className="absolute bottom-1 right-1 w-2 h-2 border-r border-b border-cyan-500/50"></div>
-
-                {/* Project number */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 bg-black border border-cyan-500/50 flex items-center justify-center text-xs text-cyan-400 font-bold">
-                  {String(index + 1).padStart(2, '0')}
+              {/* Image */}
+              <div className="relative overflow-hidden" style={{ height: 130, borderBottom: '2.5px solid #111', background: '#f5f5f5' }}>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-content-center"
+                  style={{ background: '#FFE033', border: '2px solid #111', borderRadius: 8, padding: '4px 6px', boxShadow: '2px 2px 0 #111' }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
                 </div>
+              </div>
 
-                {/* External link icon */}
-                <div className="absolute top-4 right-4 w-8 h-8 bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all z-10">
-                  <ExternalLink className="w-4 h-4 text-cyan-400" />
-                </div>
-
-                {/* Scan line effect */}
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity"></div>
-
-                <figure className="relative w-full h-48 overflow-hidden mb-4 bg-black border border-cyan-500/20">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-80"
-                  />
-                  {/* Image overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity"></div>
-                </figure>
-
-                {/* Project info */}
-                <div className="space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-lg font-medium text-gray-200 group-hover:text-cyan-400 transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-cyan-500/70 uppercase tracking-wider">
+              {/* Info */}
+              <div className="flex flex-col gap-2 p-4 flex-1">
+                <div>
+                  <p style={{ fontFamily: "'Fredoka One', cursive", fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: '#666', marginBottom: 2 }}>
                     {project.category}
                   </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2 border-t border-cyan-500/20">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="text-xs px-2 py-1 bg-cyan-500/10 border border-cyan-500/30 text-gray-400 uppercase tracking-wide"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <h3 style={{ fontFamily: "'Fredoka One', cursive", fontSize: 17, color: '#111', lineHeight: 1.1 }}>
+                    {project.title}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mt-auto">
+                  {project.tags.map(tag => (
+                    <span key={tag} style={{ background: '#fff', border: '2px solid #111', borderRadius: 8, padding: '3px 9px', fontFamily: "'Fredoka One', cursive", fontSize: 11, color: '#111' }}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </a>
@@ -137,25 +77,18 @@ export default function ProjectsList() {
         ))}
       </ul>
 
-      {/* View More Button */}
-      <div className="flex justify-center">
-        <a
-          href="/portfolio"
-          className="group relative inline-flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 font-medium hover:bg-cyan-500/20 hover:border-cyan-500 transition-all duration-300 font-mono overflow-hidden"
-        >
-          {/* Corner accents */}
-          <span className="absolute top-0 left-0 w-2 h-2 border-l border-t border-cyan-500"></span>
-          <span className="absolute top-0 right-0 w-2 h-2 border-r border-t border-pink-500"></span>
-          <span className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-pink-500"></span>
-          <span className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-cyan-500"></span>
-
-          {/* Scan line */}
-          <span className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse"></span>
-
-          <span className="relative z-10">&gt; VIEW_ALL_PROJECTS</span>
-          <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
-        </a>
-      </div>
+      {/* View all */}
+      <a
+        href="/portfolio"
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#111', border: '2.5px solid #111', borderRadius: 12, padding: '10px 20px', boxShadow: '4px 4px 0 #555', fontFamily: "'Fredoka One', cursive", fontSize: 14, color: '#FFE033', letterSpacing: '.06em', textDecoration: 'none', transition: 'transform .15s, box-shadow .15s' }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translate(-2px,-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '6px 6px 0 #555'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ''; (e.currentTarget as HTMLElement).style.boxShadow = '4px 4px 0 #555'; }}
+      >
+        View all projects
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFE033" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
     </section>
   );
 }

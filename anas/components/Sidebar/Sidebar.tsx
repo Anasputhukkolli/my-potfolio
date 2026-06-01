@@ -1,137 +1,270 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import ContactList from './ContactList';
-import SocialLinks from './SocialLinks';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import Image from "next/image";
+import ContactList from "./ContactList";
+import SocialLinks from "./SocialLinks";
+import { ChevronDown } from "lucide-react";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <aside className="sticky top-5 max-h-[calc(100vh-40px)] w-80 max-lg:w-full max-lg:max-h-none max-lg:relative bg-black rounded-none p-0 overflow-hidden transition-all duration-300  relative">
-     
-      <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-cyan-500"></div>
-      <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-pink-500"></div>
-      <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-pink-500"></div>
-      <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-cyan-500"></div>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        @keyframes tilt-hover {
+          from { transform: rotate(0deg) scale(1); }
+          to   { transform: rotate(-6deg) scale(1.07); }
+        }
+        .avatar-frame {
+          width: 96px; height: 96px;
+          border-radius: 24px;
+          overflow: hidden;
+          border: 3px solid #111;
+          box-shadow: 5px 5px 0 #111;
+          transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+        .avatar-frame:hover {
+          transform: rotate(-6deg) scale(1.07);
+          box-shadow: 7px 7px 0 #FFE033, 10px 10px 0 #111;
+        }
+        .avatar-frame-sm {
+          width: 40px; height: 40px;
+          border-radius: 12px;
+          overflow: hidden;
+          border: 2.5px solid #111;
+          box-shadow: 3px 3px 0 #111;
+          transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+        .avatar-frame-sm:hover {
+          transform: rotate(-6deg) scale(1.1);
+          box-shadow: 4px 4px 0 #FFE033, 6px 6px 0 #111;
+        }
+        .cartoon-tag {
+          font-family: 'Fredoka One', cursive;
+          font-size: 11px;
+          background: #FFE033;
+          border: 2px solid #111;
+          border-radius: 8px;
+          padding: 3px 10px;
+          color: #111;
+          box-shadow: 2px 2px 0 #111;
+        }
+        .online-dot {
+          position: absolute;
+          bottom: -3px; right: -3px;
+          width: 13px; height: 13px;
+          border-radius: 50%;
+          background: #4ade80;
+          border: 2.5px solid #fff;
+          box-shadow: 0 0 0 2px #111;
+        }
+      `}</style>
 
-      {/* Profile Section */}
-      <div className="relative px-8 pt-10 pb-8 bg-gradient-to-b from-gray-900/50 to-black z-10">
-        {/* Desktop Layout - Centered */}
-        <div className="hidden lg:block text-center">
-          {/* Profile Image */}
-          <div className="relative inline-block mb-6">
-            <figure className="relative w-36 h-36 border-4 border-cyan-500 overflow-hidden bg-gradient-to-br from-cyan-500/20 to-pink-500/20 shadow-[0_0_20px_rgba(0,255,255,0.5)]">
+      {/* ── Mobile ── */}
+      <aside
+        className="lg:hidden fixed top-0 left-0 right-0 z-50"
+        style={{
+          background: "#fff",
+          borderBottom: "3px solid #111",
+          boxShadow: "0 4px 0 #FFE033",
+        }}
+      >
+        <div className="flex items-center justify-between px-5 h-14">
+          <span
+            style={{
+              fontFamily: "'Fredoka One', cursive",
+              fontSize: 20,
+              color: "#111",
+            }}
+          >
+            Anas<span style={{ color: "#FFE033" }}>.</span>
+          </span>
+          <div className="flex items-center gap-3">
+            <div className="avatar-frame-sm" style={{ position: "relative" }}>
               <Image
-                src="/images/profile/me.png"
-                alt="Anas profile"
-                width={144}
-                height={144}
+                src="/images/profile/anas.png"
+                alt="Anas"
+                width={40}
+                height={40}
                 className="w-full h-full object-cover"
                 priority
               />
-            </figure>
-            {/* Status Indicator */}
-            <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-black shadow-[0_0_10px_rgba(0,255,0,0.8)] animate-pulse"></div>
-            
-            {/* Decorative Pixels */}
-            <div className="absolute -top-2 -left-2 w-2 h-2 bg-cyan-500 animate-pulse"></div>
-            <div className="absolute -top-2 -right-2 w-2 h-2 bg-pink-500 animate-pulse"></div>
-            <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-pink-500 animate-pulse"></div>
-            <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-cyan-500 animate-pulse"></div>
-          </div>
-
-          {/* Name and Title */}
-          <div className="">
-            <h1 className="text-4xl font-bold mb-3 text-cyan-400 tracking-wider font-mono">
-              {'ANAS'}
-            </h1>
-
-            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/50 px-6 py-2.5">
-              <div className="w-2 h-2 bg-cyan-400 animate-pulse"></div>
-              <p className="text-sm font-medium  font-mono">
-                &gt; DIGITAL_CREATOR_
-              </p>
+              <span className="online-dot" style={{ width: 9, height: 9 }} />
             </div>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle info"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#888",
+              }}
+            >
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+              />
+            </button>
           </div>
-
-          {/* Glitch Effect Text */}
-          {/* <div className=" font-mono text-xs text-green-400">
-            <div className="flex justify-center gap-1">
-              <span className="opacity-50">[</span>
-              <span className="animate-pulse">SYSTEM_ONLINE</span>
-              <span className="opacity-50">]</span>
-            </div>
-          </div> */}
         </div>
 
-        {/* Mobile Layout - Horizontal */}
-        <div className="flex lg:hidden items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            {/* Profile Image - Mobile */}
-            <div className="relative flex-shrink-0">
-              <figure className="relative w-16 h-16  overflow-hidden bg-gradient-to-br from-cyan-500/20 to-pink-500/20 shadow-[0_0_15px_rgba(0,255,255,0.5)]">
+        <div
+          className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <div
+            className="px-5 pt-4 pb-6 space-y-5"
+            style={{ background: "#fffdf0" }}
+          >
+            <div
+              className="flex items-center gap-4 p-4"
+              style={{
+                background: "#FFE033",
+                border: "2.5px solid #111",
+                borderRadius: 16,
+                boxShadow: "4px 4px 0 #111",
+              }}
+            >
+              <div style={{ position: "relative" }}>
+                <div className="avatar-frame">
+                  <Image
+                    src="/images/profile/anas.png"
+                    alt="Anas"
+                    width={96}
+                    height={96}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+                <span className="online-dot" />
+              </div>
+              <div>
+                <h1
+                  style={{
+                    fontFamily: "'Fredoka One', cursive",
+                    fontSize: 17,
+                    color: "#111",
+                    margin: 0,
+                  }}
+                >
+                  Anas Puthukkolli
+                </h1>
+                <p
+                  style={{
+                    fontFamily: "'Fredoka One', cursive",
+                    fontSize: 12,
+                    color: "#555",
+                    marginTop: 2,
+                  }}
+                >
+                  Full Stack Developer
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {["Django", "React", "UI/UX"].map((tag) => (
+                    <span key={tag} className="cartoon-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <ContactList />
+            <div style={{ height: 2, background: "#111", borderRadius: 2 }} />
+            <SocialLinks />
+          </div>
+        </div>
+      </aside>
+
+      <div className="lg:hidden h-14" />
+
+      {/* ── Desktop ── */}
+      <aside
+        className="hidden lg:flex flex-col sticky top-5 max-h-[calc(100vh-40px)] w-72 overflow-y-auto"
+        style={{
+          borderRadius: 20,
+          border: "2.5px solid #111",
+          background: "#fff",
+          boxShadow: "6px 6px 0 #111",
+        }}
+      >
+        <div className="relative">
+          <div
+            className="h-28 rounded-t-2xl"
+            style={{
+              borderBottom: "2.5px solid #111",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <Image
+              src="/images/profile/banner.png"
+              alt="banner"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>{" "}
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-12">
+            <div style={{ position: "relative" }}>
+              <div className="avatar-frame">
                 <Image
-                  src="/images/profile/me.png"
-                  alt="Anas profile"
-                  width={64}
-                  height={64}
+                  src="/images/profile/anas.png"
+                  alt="Anas"
+                  width={96}
+                  height={96}
                   className="w-full h-full object-cover"
                   priority
                 />
-              </figure>
-              {/* Status Indicator - Mobile */}
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-black shadow-[0_0_8px_rgba(0,255,0,0.8)] animate-pulse"></div>
-            </div>
-
-            {/* Name and Title - Mobile */}
-            <div className="text-left">
-              <h1 className="text-xl font-bold text-cyan-400 tracking-tight mb-1 font-mono">
-                {'<ANAS/>'}
-              </h1>
-              <p className="text-xs text-pink-400 font-mono">
-                &gt; CREATOR_
-              </p>
+              </div>
+              <span className="online-dot" />
             </div>
           </div>
-
-          {/* Mobile Toggle Button */}
-          <button
-            className="flex items-center justify-center w-12 h-12 bg-cyan-500/10 hover:bg-cyan-500/30 border border-cyan-500 text-cyan-400 cursor-pointer transition-all shadow-[0_0_10px_rgba(0,255,255,0.3)] flex-shrink-0"
-            onClick={toggleSidebar}
-            aria-label="Toggle contact information"
-          >
-            <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-          </button>
         </div>
-      </div>
 
-      {/* Contact Information */}
-      <div className={`px-8 pb-8 overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-lg:max-h-[1000px] max-lg:opacity-100' : 'max-lg:max-h-0 max-lg:opacity-0 max-lg:pb-0'} lg:max-h-none lg:opacity-100 relative z-10`}>
-        {/* Divider */}
-        <div className="relative h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent "></div>
-
-        <ContactList />
-
-        {/* Divider */}
-        <div className="relative h-px  my-8"></div>
-
-        <SocialLinks />
-
-        {/* Terminal Footer */}
-        {/* <div className="mt-8 p-3 bg-cyan-500/5 border border-cyan-500/30 font-mono text-xs text-green-400">
-          <div className="flex items-center gap-2">
-            <span className="text-cyan-400">$</span>
-            <span className="animate-pulse">status: ready_</span>
+        <div
+          className="mt-14 px-6 pb-5 text-center"
+          style={{ borderBottom: "2px solid #eee" }}
+        >
+          <h1
+            style={{
+              fontFamily: "'Fredoka One', cursive",
+              fontSize: 19,
+              color: "#111",
+            }}
+          >
+            Anas Puthukkolli
+          </h1>
+          <p
+            style={{
+              fontFamily: "'Fredoka One', cursive",
+              fontSize: 12,
+              color: "#888",
+              marginTop: 4,
+              letterSpacing: ".04em",
+            }}
+          >
+            Full Stack Developer
+          </p>
+          <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+            {["Django", "React", "UI/UX"].map((tag) => (
+              <span key={tag} className="cartoon-tag">
+                {tag}
+              </span>
+            ))}
           </div>
-        </div> */}
-      </div>
-    </aside>
+        </div>
+
+        <div className="px-6 py-6 space-y-6 flex-1">
+          <ContactList />
+          <div style={{ height: 2, background: "#111", borderRadius: 2 }} />
+          <SocialLinks />
+        </div>
+      </aside>
+    </>
   );
 }
