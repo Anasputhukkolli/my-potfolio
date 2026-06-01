@@ -1,9 +1,7 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  // Just let it through — the page handles its own password gate
+export function proxy(request: NextRequest) {
   return NextResponse.next();
 }
 
