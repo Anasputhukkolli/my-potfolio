@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Anas Puthukkolli' }],
   creator: 'Anas Puthukkolli',
   icons: {
-    icon: '/logo.jpg',
+    icon: './images/logo.png',
   },
 };
 
