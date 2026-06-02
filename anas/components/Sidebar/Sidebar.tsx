@@ -178,7 +178,7 @@ export default function Sidebar() {
                     margin: 0,
                   }}
                 >
-                  Anas Puthukkolli
+                  Muhammed Anas 
                 </h1>
                 <p
                   style={{
