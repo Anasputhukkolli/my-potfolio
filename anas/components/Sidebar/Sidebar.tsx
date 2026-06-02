@@ -64,6 +64,31 @@ export default function Sidebar() {
           border: 2.5px solid #fff;
           box-shadow: 0 0 0 2px #111;
         }
+       @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.logo-fun {
+  animation: logoWiggle 2s ease-in-out infinite;
+  transform-origin: center bottom;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+
+@keyframes logoWiggle {
+  0%   { transform: rotate(-3deg) scale(1); }
+  15%  { transform: rotate(3deg) scale(1.05); }
+  30%  { transform: rotate(-2deg) scale(1); }
+  45%  { transform: rotate(2deg) scale(1.03); }
+  60%  { transform: rotate(-1deg) scale(1); }
+  75%  { transform: rotate(1deg) scale(1.02); }
+  100% { transform: rotate(-3deg) scale(1); }
+}
+
+@keyframes logoSpin360 {
+  from { transform: rotate(0deg) scale(1); }
+  to   { transform: rotate(360deg) scale(1.1); }
+}
       `}</style>
 
       {/* ── Mobile ── */}
@@ -76,14 +101,15 @@ export default function Sidebar() {
         }}
       >
         <div className="flex items-center justify-between px-5 h-14">
-          <span
-            style={{
-              fontFamily: "'Fredoka One', cursive",
-              fontSize: 20,
-              color: "#111",
-            }}
-          >
-            Anas<span style={{ color: "#FFE033" }}>.</span>
+          <span style={{ display: "inline-block" }}>
+            <Image
+              src="/images/logofull.png"
+              alt="Anas"
+              width={65}
+              height={60}
+              className="logo-fun w-full h-full object-cover"
+              priority
+            />
           </span>
           <div className="flex items-center gap-3">
             <div className="avatar-frame-sm" style={{ position: "relative" }}>
